@@ -1,0 +1,107 @@
+Auto pairs plugin for neovim. Designed to be as configurable as possible.
+
+
+usage:
+
+	---@class Opts
+	---
+	---The closing string for this pair
+	---@field 1 string
+	---
+	---       |     -->    (|)
+	---@field auto_insert_closer boolean|nil
+	---
+	---       (|)   -->    |
+	---@field auto_delete_closer boolean|nil
+	---
+	---  1)   (|)  -->  ()|
+	---  2)   (       (
+	---       |  -->  )|
+	---       )
+	---@field skip_over_closer boolean|nil
+	---
+	---  1)   (|)    --[press space]-->  ( | )
+	---  2)   ( | )  --[press <bs>]-->   (|)
+	---@field balance_spaces boolean|nil
+	---
+	---  1)   (|)    --[press <cr>]-->    (
+	---                                   |
+	---                                   )
+	---  2)   (                           (|)
+	---       |      --[press <bs>]-->
+	---       )
+	---@field balance_newlines boolean|nil
+	---
+	---   false:    (|)    --[press <cr>]-->    (
+	---                                         |
+	---                                         )
+	---   true:     (|)    --[press <cr>]-->    (
+	---                                             |
+	---                                         )
+	---@field indent_on_cr boolean|nil
+
+	require('pairs').setup(Opts)
+
+
+my config:
+
+	require('pairs').setup({
+		['{'] = {
+			'}',
+			auto_insert_closer = true,
+			auto_delete_closer = true,
+			skip_over_closer = true,
+			balance_spaces = true,
+			balance_newlines = true,
+			indent_on_cr = true
+		},
+		['['] = {
+			']',
+			auto_insert_closer = true,
+			auto_delete_closer = true,
+			skip_over_closer = true,
+			balance_spaces = true,
+			balance_newlines = true,
+			indent_on_cr = true
+		},
+		['('] = {
+			')',
+			auto_insert_closer = true,
+			auto_delete_closer = true,
+			skip_over_closer = true,
+			balance_spaces = true,
+			balance_newlines = true,
+			indent_on_cr = true
+		},
+		['>'] = {
+			'</',
+			balance_spaces = true,
+			balance_newlines = true,
+			indent_on_cr = true
+		}, -- this is all you need to keep XML tags balanced.
+		['"'] = {
+			'"',
+			auto_insert_closer = true,
+			auto_delete_closer = true,
+			skip_over_closer = true
+		},
+		['`'] = {
+			'`',
+			auto_insert_closer = true,
+			auto_delete_closer = true,
+			skip_over_closer = true
+		},
+		['<!--'] = {
+			'-->',
+			auto_insert_closer = true,
+			balance_spaces = true,
+			balance_newlines = true,
+			indent_on_cr = true
+		},
+		['/**'] = {
+			'*/',
+			auto_insert_closer = true,
+			balance_spaces = true,
+			balance_newlines = true
+		},
+	})
